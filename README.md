@@ -6,8 +6,11 @@
 ####Titanic: Machine Learning from Disaster
 ```
 Using randomForest and eval to replcae NA values Automatically.
-Other libraries... party::cforest, dplyr
+Other libraries: party::cforest, dplyr
 ```
+
+
+
 
 
 #####to be continue...
