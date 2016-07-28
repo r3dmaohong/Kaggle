@@ -7,7 +7,7 @@ library(data.table)
 ##https://www.kaggle.com/c/facial-keypoints-detection/details/getting-started-with-r
 
 ##Go parallel
-cl<-makeCluster(4) ##4 Cores
+cl<-makeCluster(3) ##4 Cores
 registerDoSNOW(cl)
 
 setwd(file.path("Kaggle","Facial-Keypoints-Detection"))
@@ -131,7 +131,7 @@ predictions <- data.frame(ImageId = 1:nrow(d.test), p)
 ##Transfet table format.
 submission <- melt(predictions, id.vars="ImageId", variable.name="FeatureName", value.name="Location")
 ##Submissin format
-example.submission <- read.csv('input\\IdLookupTable.csv'))
+example.submission <- read.csv('input\\IdLookupTable.csv')
 sub.col.names      <- c("RowId","Location")
 example.submission$Location <- NULL
 
@@ -141,5 +141,7 @@ submission <- merge(example.submission, submission, all.x=T, sort=F)
 submission <- submission[, sub.col.names]
 
 stopCluster(cl)
+#tmp = fread("output\\submission_search.csv")
+#submission[is.na(submission[,2]),2] = tmp[is.na(submission[,2]),2]
 
-write.csv(submission, "output\\submission_search.csv", quote=F, row.names=F)
+write.csv(submission, "output\\submission_search-10.csv", quote=F, row.names=F)
